@@ -1,6 +1,5 @@
 # Base docker image
-FROM pandeiro/oracle-jdk8
-MAINTAINER Peter Norrhall <peter.norrhall@movlin.se>
+FROM dockette/jdk8
 
 ENV LEIN_ROOT true
 
@@ -8,9 +7,8 @@ RUN wget -q -O /usr/bin/lein \
     https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein \
     && chmod +x /usr/bin/lein
 
-RUN apt-get update
-
-RUN apt-get install -y git
+RUN apk update \
+ && apk add -y git bash
 
 RUN mkdir /app
 WORKDIR /app

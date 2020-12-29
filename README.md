@@ -50,7 +50,7 @@ Code Maat analysis different version control systems (Git, Mercurial, Subversion
 
 For example to extract data from a Git project since 2015 
 ```
-git log --pretty=format:'[%h] %aN %ad %s' --date=short --numstat --after=2015-01-01 > mygit.log
+git log --pretty=format:'[%h] %aN %ad %s' --date=short --numstat > mygit.log
 ```
 
 ## Run Code Maat Docker image
@@ -60,17 +60,17 @@ To understand how to use code-maat with the different command line option see [R
 For example to analyse the code age of your files
 
 ```
-docker run --rm -v /Users/peter/Documents/code-maat:/codemaat code-maat -l /codemaat/mygit.log -c git -a age
+docker run --rm -v $(pwd)/code-maat:/codemaat code-maat -l /codemaat/mygit.log -c git -a age
 ```
 
 The log file (mygit.log) that you created earlier resides on the local system. To allow Code Maat to access you need to mount the local folder to the container using Docker's `-v` option. 
-In the example above the mygit.log is located in `/Users/peter/Documents/code-maat`. This is linked to the container directory `/codemaat` which is used when the log file is specified for Code Maat with `-l /codemaat/mygit.log`. You can specify any directory for the container when you mount as long as you use the same path for the `-l` option.
+In the example above the mygit.log is located in `$(pwd)/code-maat`. This is linked to the container directory `/codemaat` which is used when the log file is specified for Code Maat with `-l /codemaat/mygit.log`. You can specify any directory for the container when you mount as long as you use the same path for the `-l` option.
 
 `--rm` is used to remove the Docker container after the analysis is done
 
 ## Contributions
 
-This docker image uses work provided by [Murphy McMahon](https://github.com/pandeiro) on how to install [Leiningen](http://leiningen.org) to compile the Code Maat Clojure code
+This docker image uses work provided by [dockette](https://hub.docker.com/r/dockette/jdk8) on how to install [Leiningen](http://leiningen.org) to compile the Code Maat Clojure code
 
 ## License
 
